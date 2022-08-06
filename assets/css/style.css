@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
@@ -11,6 +12,7 @@
     --black: #0D2226;
 }
 
+/* Configurações gerais */
 * {
     margin: 0px;
     padding: 0px;
@@ -23,6 +25,7 @@ body {
     font: normal normal 1em 'Dm Sans';
 }
 
+/* Header */
 header {
     position: fixed;
     z-index: 100;
@@ -60,9 +63,9 @@ header .logo img {
     height: 4.4rem;
 }
 
+/* Menu mobile */
 header nav {
     visibility: hidden;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,64 +75,119 @@ header nav {
     left: 0px;
     width: 100vw;
 
-    background-color: white;
+    background-color: var(--color2);
     box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.35);
 }
 
-header nav .menu-opened {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background-color: white;
+header nav.active {
+    visibility: visible;
 }
 
 header nav a {
-    padding: 1.5rem 0px;
+    padding-top: 2rem;
 
     text-decoration: none;
-    color: var(--color1);
+    color: white;
 
     font-size: 1.5em;
     font-weight: 500;
 }
 
-header nav .menu-opened a {
-    display: none;
-    padding: 0.5rem 0px;
-
-    text-decoration: none;
-    color: var(--color1);
-
-    font-size: 1em;
-    font-weight: 500;
+header nav a:last-child {
+    padding-bottom: 2rem;
 }
 
 header nav a#conteudos {
     font-style: italic;
 }
 
-header nav a#conteudos::after {
-    content: " v";
-    color: var(--color1);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-style: normal;
+/* Hambuguer button menu */
+.mobile-menu-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    margin-right: 2.5rem;
 }
 
-header .menu {
+.mobile-menu-button .line {
+    display: block;
+
+    width: 18px;
+    height: 2px;
+    border-radius: 4px;
+
+    margin-top: 5px;
+    background-color: white;
+    transition: transform .5s, opacity .25s;
+}
+
+/* Animação do button */
+.mobile-menu-button.active .line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-button.active .line:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu-button.active .line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Dropdown menu */
+header nav .dropdown-menu{
+    display: none;
+    margin-top: .4rem;
+}
+
+header nav .dropdown-menu::after {
+    content: '';
+
     position: absolute;
-    left: 87%;
-    top: 20px;
-    width: 20px;
-    height: 10px;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: 0.5rem solid transparent;
+    border-bottom-color: white;
 }
 
-header .menu .row {
-    width: 20px;
-    height: 3px;
-    border-radius: 32px;
-
-    margin-top: 3px;
+/* Mouse hover dropdown */
+header nav a#conteudos:hover + .dropdown-menu,
+header nav .dropdown-menu:hover {
+    display: block;
+    position: relative;
 
     background-color: white;
+    padding: 0px 2rem;
+    border-radius: 16px;
+
+    transform-origin: top center;
+    transform: rotateX(0deg);
+}
+
+header nav a#conteudos:hover + .dropdown-menu a, 
+header nav .dropdown-menu:hover a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0.5rem 0px;
+
+    text-decoration: none;
+    color: var(--color1);
+    font-size: 1em;
+    font-weight: 500;
+}
+
+header nav .dropdown-menu a:hover {
+    color: var(--color3);
+    background-color: rgba(145, 207, 89, 0.25);
+    border-radius: 16px;
+    text-decoration: underline;
+    transition-duration: .2s;
+}
+
+main {
+    padding-top: 65px;
 }
